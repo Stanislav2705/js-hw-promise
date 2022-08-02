@@ -16,3 +16,56 @@ img {
   display: block;
   max-width: 100%;
 }
+
+input {
+  padding: 12px 12px;
+
+  height: 40px;
+  text-align: center;
+  font-size: 16px;
+
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  border-radius: 4px;
+}
+
+
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.timer {
+  display: flex;
+  justify-content: center;
+}
+
+.field {
+  justify-content: space-between;
+
+  margin: 10px;
+}
+
+.value {
+  display: block;
+  text-align: center;
+  font-weight: 600px;
+  font-size: 32px;
+}
+
+.wrapper button {
+  margin-left: 10px;
+  padding: 20px;
+  text-transform: uppercase;
+  font-size: 20px;
+  border: 0px;
+}
+
+.wrapper button:active {
+  background-color: rgb(220, 220, 220);
+}
+
+[data-start] {
+  margin-right: 20px;
+}

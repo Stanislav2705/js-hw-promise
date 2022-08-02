@@ -19,9 +19,10 @@ const timer = {
     }
 
     this.isActive = true;
+    this.updateBackgroundColor();
 
     this.intervalId = setInterval(() => {
-      refs.bodyColor.style.backgroundColor = getRandomHexColor();
+      this.updateBackgroundColor();
 
       console.log(getRandomHexColor());
     }, 1000);
@@ -29,6 +30,9 @@ const timer = {
   stop() {
     clearInterval(this.intervalId);
     this.isActive = false;
+  },
+  updateBackgroundColor() {
+    refs.bodyColor.style.backgroundColor = getRandomHexColor();
   },
 };
 
@@ -39,3 +43,16 @@ refs.startBtn.addEventListener('click', () => {
 refs.stopBtn.addEventListener('click', () => {
   timer.stop();
 });
+
+refs.startBtn.addEventListener('click', onStartBtnClick);
+refs.stopBtn.addEventListener('click', onStopBtnClick);
+
+function onStartBtnClick() {
+  refs.startBtn.setAttribute('disabled', true);
+  refs.stopBtn.removeAttribute('disabled');
+}
+
+function onStopBtnClick() {
+  refs.startBtn.removeAttribute('disabled');
+  refs.stopBtn.setAttribute('disabled', true);
+}
