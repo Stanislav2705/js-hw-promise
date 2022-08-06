@@ -5,9 +5,9 @@ const delayField = document.querySelector('[name="delay"]');
 const stepField = document.querySelector('[name="step"]');
 const amountField = document.querySelector('[name="amount"]');
 
-formPromise.addEventListener('submit', onSubmit);
-
 let isActive = false;
+
+formPromise.addEventListener('submit', onSubmit);
 
 function onSubmit(e) {
   e.preventDefault();
