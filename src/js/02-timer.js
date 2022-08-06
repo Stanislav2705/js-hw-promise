@@ -6,6 +6,14 @@ import Notiflix from 'notiflix';
 // 3) Потрібно знайти їч різницю
 // 4) Різницю крнвертувати в нормальний формат длякористувача
 // 5) Відобразити це все на екрані
+const flatPikerElemet = document.querySelector('#datetime-picker');
+const daysElement = document.querySelector('[data-days]');
+const hoursElement = document.querySelector('[data-hours]');
+const minutesElement = document.querySelector('[data-minutes]');
+const secondsElement = document.querySelector('[data-seconds]');
+const buttonElement = document.querySelector('[data-start]');
+
+let timerId;
 
 const options = {
   enableTime: true,
@@ -13,30 +21,33 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-    let timerId = null;
+    timerId = selectedDates[0];
     if (selectedDates[0] > new Date()) {
       onStartBtnClick();
     } else if (selectedDates[0] < new Date()) {
       Notiflix.Notify.failure('Please choose a date in the future');
     }
-    buttonElement.addEventListener('click', () => {
-      const result = selectedDates[0] - new Date();
-      timerId = setInterval(convertMs(result), 1000);
-    });
     console.log(selectedDates[0]);
   },
 };
 
+buttonElement.addEventListener('click', start);
+
+function start() {
+  buttonElement.setAttribute('disabled', 'true');
+  const interval = setInterval(() => {
+    if (new Date() > timerId) {
+      clearInterval(interval);
+      return;
+    }
+    const delta = timerId - new Date();
+    convertMs(delta);
+  }, 1000);
+}
+
 function pad(value) {
   return String(value).padStart(2, '0');
 }
-
-const flatPikerElemet = document.querySelector('#datetime-picker');
-const daysElement = document.querySelector('[data-days]');
-const hoursElement = document.querySelector('[data-hours]');
-const minutesElement = document.querySelector('[data-minutes]');
-const secondsElement = document.querySelector('[data-seconds]');
-const buttonElement = document.querySelector('[data-start]');
 
 const flatPiker = flatpickr(flatPikerElemet, options);
 
